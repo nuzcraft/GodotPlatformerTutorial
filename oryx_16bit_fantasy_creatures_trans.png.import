@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/oryx_16bit_fantasy_creatures_trans.png-e1905d1550e0868284d5d56d0877bb55.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://oryx_16bit_fantasy_creatures_trans.png"
+dest_files=[ "res://.import/oryx_16bit_fantasy_creatures_trans.png-e1905d1550e0868284d5d56d0877bb55.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
