@@ -1,15 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://PlayerHobbitMSkin.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://DefaultPlayerMovementData.tres" type="Resource" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5, 8 )
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 2 )
-JUMP_RELEASE_FORCE = -70
-FORCE_FALL_GRAVITY = 4
+moveData = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
@@ -20,3 +21,6 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
 shape = SubResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true

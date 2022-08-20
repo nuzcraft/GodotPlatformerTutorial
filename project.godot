@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player.gd"
+}, {
+"base": "Resource",
+"class": "PlayerMovementData",
+"language": "GDScript",
+"path": "res://PlayerMovementData.gd"
+} ]
+_global_script_class_icons={
+"Player": "",
+"PlayerMovementData": ""
+}
+
 [application]
 
 config/name="PlatformerTutorial"
@@ -49,6 +65,11 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Characters"
 
 [physics]
 
