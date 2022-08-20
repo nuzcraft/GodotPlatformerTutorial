@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://PlayerMovementData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+JUMP_FORCE = -275
+JUMP_RELEASE_FORCE = -70
+GRAVITY = 12
+FORCE_FALL_GRAVITY = 6
+MAX_GRAVITY = 300
+FRICTION = 35
+HORIZONTAL_ACCELERATION = 35
+HORIZONTAL_MAX_SPEED = 200

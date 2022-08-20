@@ -1,14 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-export(int) var JUMP_FORCE = -275
-export(int) var JUMP_RELEASE_FORCE = -80
-export(int) var GRAVITY = 12
-export(int) var FORCE_FALL_GRAVITY = 8
-export(int) var MAX_GRAVITY = 40
-export(int) var FRICTION = 35
-export(int) var HORIZONTAL_ACCELERATION = 25
-export(int) var HORIZONTAL_MAX_SPEED = 165
+export(Resource) var moveData
 
 var velocity = Vector2.ZERO
 onready var animatedSprite = $AnimatedSprite
@@ -28,30 +21,30 @@ func _physics_process(delta):
 	else:
 		apply_acceleration(input.x)
 		animatedSprite.animation = "Run"
-		if input.x > 0:
-			animatedSprite.flip_h = true
-		elif input.x <0:
-			animatedSprite.flip_h = false
+		animatedSprite.flip_h = input.x > 0
 	
 	if is_on_floor():
 		if Input.is_action_pressed("ui_up"):
-			velocity.y = JUMP_FORCE
+			velocity.y = moveData.JUMP_FORCE
 			animatedSprite.animation = "Jump"
 	else: 
-		if Input.is_action_just_released("ui_up") and velocity.y < -JUMP_RELEASE_FORCE:
-			velocity.y = -JUMP_RELEASE_FORCE
+		if Input.is_action_just_released("ui_up") and velocity.y < -moveData.JUMP_RELEASE_FORCE:
+			velocity.y = -moveData.JUMP_RELEASE_FORCE
 		if velocity.y > 0:
-			velocity.y += FORCE_FALL_GRAVITY
-		animatedSprite.animation = "Falling"
+			velocity.y += moveData.FORCE_FALL_GRAVITY
+			animatedSprite.animation = "Falling"
+		else:
+			animatedSprite.animation = "Jump"
+			animatedSprite.frame = 1
 		
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 func apply_gravity():
-	velocity.y += GRAVITY
-	velocity.y = min(velocity.y, MAX_GRAVITY)
+	velocity.y += moveData.GRAVITY
+	velocity.y = min(velocity.y, moveData.MAX_GRAVITY)
 
 func apply_friction():
-	velocity.x = move_toward(velocity.x, 0, FRICTION)
+	velocity.x = move_toward(velocity.x, 0, moveData.FRICTION)
 	
 func apply_acceleration(amount):
-	velocity.x = move_toward(velocity.x, HORIZONTAL_MAX_SPEED*amount, HORIZONTAL_ACCELERATION)
+	velocity.x = move_toward(velocity.x, moveData.HORIZONTAL_MAX_SPEED*amount, moveData.HORIZONTAL_ACCELERATION)

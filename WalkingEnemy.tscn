@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://oryx_16bit_fantasy_creatures_trans.png" type="Texture" id=1]
+[ext_resource path="res://WalkingEnemy.gd" type="Script" id=2]
+[ext_resource path="res://Hitbox.tscn" type="PackedScene" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 360, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 384, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "Walking",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 6.5, 9 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 6.5, 9 )
+
+[node name="WalkingEnemy" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -12 )
+frames = SubResource( 3 )
+animation = "Walking"
+frame = 1
+playing = true
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, -9 )
+shape = SubResource( 4 )
+
+[node name="LedgeCheckRight" type="RayCast2D" parent="."]
+position = Vector2( 6, -1 )
+enabled = true
+cast_to = Vector2( 0, 2 )
+
+[node name="LedgeCheckLeft" type="RayCast2D" parent="."]
+position = Vector2( -7, -1 )
+enabled = true
+cast_to = Vector2( 0, 2 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -0.5, -9 )
+shape = SubResource( 5 )
