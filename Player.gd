@@ -6,10 +6,11 @@ enum {
 	CLIMB,
 }
 
-export(Resource) var moveData
+export(Resource) var moveData = preload("res://DefaultPlayerMovementData.tres") as PlayerMovementData
 
 var velocity = Vector2.ZERO
 var state = MOVE
+var double_jump = moveData.DOUBLE_JUMP_COUNT
 
 onready var animatedSprite = $AnimatedSprite
 onready var ladderCheck = $LadderCheck
@@ -41,12 +42,18 @@ func move_state(input):
 		animatedSprite.flip_h = input.x > 0
 	
 	if is_on_floor():
-		if Input.is_action_pressed("ui_up"):
+		double_jump = moveData.DOUBLE_JUMP_COUNT
+		if Input.is_action_just_pressed("ui_up"):
 			velocity.y = moveData.JUMP_FORCE
 			animatedSprite.animation = "Jump"
 	else: 
 		if Input.is_action_just_released("ui_up") and velocity.y < -moveData.JUMP_RELEASE_FORCE:
 			velocity.y = -moveData.JUMP_RELEASE_FORCE
+			
+		if Input.is_action_just_pressed("ui_up") && double_jump>0:
+			velocity.y = moveData.JUMP_FORCE
+			double_jump -= 1
+			
 		if velocity.y > 0:
 			velocity.y += moveData.FORCE_FALL_GRAVITY
 			animatedSprite.animation = "Falling"
@@ -64,7 +71,7 @@ func climb_state(input):
 	else:
 		animatedSprite.animation = "Falling"
 		
-	velocity = input * 75
+	velocity = input * moveData.CLIMB_SPEED
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 func is_on_ladder():
