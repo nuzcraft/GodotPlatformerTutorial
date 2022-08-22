@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://PlayerHobbitFSkin.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://DefaultPlayerMovementData.tres" type="Resource" id=3]
+[ext_resource path="res://ShakeCamera.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5, 8 )
@@ -22,7 +23,7 @@ flip_h = true
 position = Vector2( 0, 4 )
 shape = SubResource( 4 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="ShakeCamera" parent="." instance=ExtResource( 4 )]
 current = true
 
 [node name="LadderCheck" type="RayCast2D" parent="."]
