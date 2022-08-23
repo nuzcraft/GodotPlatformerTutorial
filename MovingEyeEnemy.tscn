@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://oryx_16bit_fantasy_creatures_trans.png" type="Texture" id=1]
+[ext_resource path="res://Hitbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://MovingEyeEnemy.gd" type="Script" id=3]
+
+[sub_resource type="Curve2D" id=10]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 216, 504, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 216, 528, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 6.0
+
+[sub_resource type="Animation" id=9]
+resource_name = "MoveAlongPathBounce"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "MoveAlongPathLoop"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[node name="MovingEyeEnemy" type="Path2D"]
+curve = SubResource( 10 )
+script = ExtResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotate = false
+
+[node name="Enemy" type="Node2D" parent="PathFollow2D"]
+
+[node name="Sprite" type="AnimatedSprite" parent="PathFollow2D/Enemy"]
+position = Vector2( 1, 0 )
+frames = SubResource( 8 )
+animation = "idle"
+playing = true
+
+[node name="Hitbox" parent="PathFollow2D/Enemy" instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Enemy/Hitbox"]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "MoveAlongPathLoop"
+anims/MoveAlongPathBounce = SubResource( 9 )
+anims/MoveAlongPathLoop = SubResource( 4 )
+anims/RESET = SubResource( 5 )
