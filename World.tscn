@@ -65,15 +65,5 @@ curve = SubResource( 1 )
 [node name="MovingEyeEnemy2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 252, 108 )
 curve = SubResource( 2 )
-
-[node name="PathFollow2D" parent="MovingEyeEnemy2" index="0"]
-position = Vector2( 0, 60 )
-offset = 60.0122
-
-[node name="Sprite" parent="MovingEyeEnemy2/PathFollow2D/Enemy" index="0"]
-frame = 0
-
-[node name="AnimationPlayer" parent="MovingEyeEnemy2" index="1"]
-autoplay = "MoveAlongPathBounce"
-
-[editable path="MovingEyeEnemy2"]
+animation_type = 1
+speed = 2
