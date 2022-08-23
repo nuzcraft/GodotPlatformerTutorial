@@ -9,3 +9,5 @@ export(int) var MAX_GRAVITY = 300
 export(int) var FRICTION = 35
 export(int) var HORIZONTAL_ACCELERATION = 25
 export(int) var HORIZONTAL_MAX_SPEED = 165
+export(int) var CLIMB_SPEED = 75
+export(int) var DOUBLE_JUMP_COUNT = 1
