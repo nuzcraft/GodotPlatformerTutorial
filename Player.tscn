@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://PlayerHobbitFSkin.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://DefaultPlayerMovementData.tres" type="Resource" id=3]
-[ext_resource path="res://ShakeCamera.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5, 8 )
@@ -14,20 +13,18 @@ script = ExtResource( 2 )
 moveData = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -12 )
 frames = ExtResource( 1 )
 animation = "Falling"
 playing = true
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4 )
+position = Vector2( 0, -8 )
 shape = SubResource( 4 )
 
-[node name="ShakeCamera" parent="." instance=ExtResource( 4 )]
-current = true
-
 [node name="LadderCheck" type="RayCast2D" parent="."]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -16 )
 enabled = true
 cast_to = Vector2( 0, 20 )
 collide_with_areas = true
@@ -40,6 +37,9 @@ one_shot = true
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+position = Vector2( 0, -12 )
 
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_JumpBufferTimer_timeout"]
 [connection signal="timeout" from="CoyoteJumpTimer" to="." method="_on_CoyoteJumpTimer_timeout"]

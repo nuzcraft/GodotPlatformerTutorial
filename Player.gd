@@ -18,6 +18,7 @@ onready var animatedSprite: = $AnimatedSprite
 onready var ladderCheck: = $LadderCheck
 onready var jumpBufferTimer: = $JumpBufferTimer
 onready var coyoteJumpTimer: = $CoyoteJumpTimer
+onready var remoteTransform2D := $RemoteTransform2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -77,8 +78,9 @@ func climb_state(input):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 func player_die():
-	get_tree().reload_current_scene()
 	SoundPlayer.play_sound(SoundPlayer.HURT)
+	queue_free()
+	Events.emit_signal("player_died")
 
 func input_jump_release():
 	if Input.is_action_just_released("ui_up") and velocity.y < -moveData.JUMP_RELEASE_FORCE:
@@ -140,3 +142,7 @@ func _on_JumpBufferTimer_timeout():
 
 func _on_CoyoteJumpTimer_timeout():
 	coyote_jump = false
+
+func connectCamera(camera):
+	var camera_path = camera.get_path()
+	remoteTransform2D.remote_path = camera_path
