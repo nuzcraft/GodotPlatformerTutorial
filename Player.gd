@@ -23,7 +23,7 @@ onready var coyoteJumpTimer: = $CoyoteJumpTimer
 func _ready():
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var input = Vector2.ZERO
 	input.x = Input.get_axis("ui_left", "ui_right")
 	input.y = Input.get_axis("ui_up", "ui_down")
@@ -76,6 +76,10 @@ func climb_state(input):
 	velocity = input * moveData.CLIMB_SPEED
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+func player_die():
+	get_tree().reload_current_scene()
+	SoundPlayer.play_sound(SoundPlayer.HURT)
+
 func input_jump_release():
 	if Input.is_action_just_released("ui_up") and velocity.y < -moveData.JUMP_RELEASE_FORCE:
 		velocity.y = -moveData.JUMP_RELEASE_FORCE
@@ -84,6 +88,7 @@ func input_double_jump():
 	if Input.is_action_just_pressed("ui_up") && double_jump>0:
 		velocity.y = moveData.JUMP_FORCE
 		double_jump -= 1
+		SoundPlayer.play_sound(SoundPlayer.JUMP)
 	
 func buffer_jump():
 	if Input.is_action_just_pressed("ui_up"):
@@ -109,6 +114,7 @@ func input_jump():
 		velocity.y = moveData.JUMP_FORCE
 		animatedSprite.animation = "Jump"
 		buffered_jump = false
+		SoundPlayer.play_sound(SoundPlayer.JUMP)
 		
 func reset_double_jumps():
 	double_jump = moveData.DOUBLE_JUMP_COUNT
