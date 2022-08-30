@@ -80,7 +80,7 @@ func climb_state(input):
 func player_die():
 	SoundPlayer.play_sound(SoundPlayer.HURT)
 	queue_free()
-	Events.emit_signal("player_died")
+	Events.emit_signal("player2_died")
 
 func input_jump_release():
 	if Input.is_action_just_released("ui_up") and velocity.y < -moveData.JUMP_RELEASE_FORCE:
