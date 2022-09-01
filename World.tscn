@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://MovingEyeEnemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ShakeCamera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Checkpoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://StompEnemy.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -77,3 +78,6 @@ current = true
 position = Vector2( 240, 48 )
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="StompEnemy" parent="." instance=ExtResource( 10 )]
+position = Vector2( 132, 60 )
