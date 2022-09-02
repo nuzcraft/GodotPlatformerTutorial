@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://PlayerHobbitFSkin.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://Player.gd" type="Script" id=2]
-[ext_resource path="res://DefaultPlayerMovementData.tres" type="Resource" id=3]
+[ext_resource path="res://Player/PlayerHobbitFSkin.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Player/DefaultPlayerMovementData.tres" type="Resource" id=2]
+[ext_resource path="res://Player/Player.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5, 8 )
@@ -10,8 +10,8 @@ extents = Vector2( 5, 8 )
 [node name="Player" type="KinematicBody2D"]
 z_index = 10
 collision_layer = 2
-script = ExtResource( 2 )
-moveData = ExtResource( 3 )
+script = ExtResource( 3 )
+moveData = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -12 )
