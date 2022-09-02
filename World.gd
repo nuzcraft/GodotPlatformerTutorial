@@ -11,7 +11,7 @@ onready var timer := $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	VisualServer.set_default_clear_color(Color.skyblue)
+	VisualServer.set_default_clear_color(Color.black)
 	player.connectCamera(shakeCamera)
 	Events.connect("player_died", self, "_on_player_died")
 	Events.connect("hit_checkpoint", self, "_on_hit_checkpoint")
